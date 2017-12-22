@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style type="text/css">
+		/*.color-red { color: red; }*/
+		/*.color-blue { color: blue; }*/
+		.is-loading { background: red; }
+	</style>
+	<link rel="stylesheet" href="">
+	<script src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<h2>All Tasks</h2>
+		<ul>
+			<li v-for="task in tasks">
+				<span v-text="task.description"></span>
+				<input type="checkbox" v-model="task.completed">
+			</li>
+		</ul>
+
+		<h2>Completed Tasks</h2>
+		<ul>
+			<li v-for="task in completedTasks" v-text="task.description"></li>
+		</ul>
+
+		<h2>Incomplete Tasks</h2>
+		<ul>
+			<li v-for="task in incompleteTasks" v-text="task.description"></li>
+		</ul>
+	</div>	
+	
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#root',
+			data: {
+				tasks: [
+					{description: 'Go to the store', completed: true},
+					{description: 'Finish screencast', completed: false},
+					{description: 'Make donation', completed: false},
+					{description: 'Clear inbox', completed: false},
+					{description: 'Make dinner', completed: false},
+					{description: 'Clean room', completed: true}
+				]
+			},
+			computed: {
+				completedTasks() {
+					return this.tasks.filter(task => task.completed);
+				},
+				incompleteTasks() {
+					return this.tasks.filter(task => !task.completed);
+				}
+			}
+		});
+	</script>
+</body>
+</html>
